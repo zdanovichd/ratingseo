@@ -1,0 +1,5 @@
+.DS_Store
+**/.DS_Store
+site.zip
+site/mail-config.php
+site/mail-error.log

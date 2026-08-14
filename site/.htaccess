@@ -1,0 +1,36 @@
+RewriteEngine On
+RewriteBase /
+
+# A) /index.html → https://ratingseo.ru/  одним 301 (сразу финальный URL)
+RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]
+RewriteRule ^index\.html$ https://ratingseo.ru/ [R=301,L]
+
+# B) Несколько слэшей — ловим по «сырому» запросу (THE_REQUEST),
+#    т.к. Apache часто схлопывает // в REQUEST_URI и отдаёт 200
+#    //foo/bar → /foo/bar
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /{2,}([^\s?]*)\ HTTP [NC]
+RewriteRule .* https://ratingseo.ru/%1 [R=301,L,NE,QSA]
+
+#    /foo//bar → /foo/bar
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^\s?]*?)/{2,}([^\s?]*)\ HTTP [NC]
+RewriteRule .* https://ratingseo.ru/%1/%2 [R=301,L,NE,QSA]
+
+#    fallback, если // всё же попал в REQUEST_URI
+RewriteCond %{REQUEST_URI} ^(.*)//+(.*)$
+RewriteRule .* https://ratingseo.ru%1/%2 [R=301,L,NE,QSA]
+
+# C) http и/или www → https://ratingseo.ru/... одним 301
+#    (учитываем X-Forwarded-Proto на прокси Beget)
+RewriteCond %{HTTP:X-Forwarded-Proto} =http [OR]
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\.ratingseo\.ru$ [NC]
+RewriteCond %{HTTP_HOST} ^(?:www\.)?ratingseo\.ru$ [NC]
+RewriteRule ^ https://ratingseo.ru%{REQUEST_URI} [R=301,L]
+
+# Политика
+RewriteRule ^privacy\.html$ https://ratingseo.ru/privacy [R=301,L]
+RewriteRule ^privacy$ privacy/index.html [L]
+
+# Методология
+RewriteRule ^methodology\.html$ https://ratingseo.ru/methodology [R=301,L]
+RewriteRule ^methodology$ methodology/index.html [L]

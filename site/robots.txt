@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Host: ratingseo.ru
+Sitemap: https://ratingseo.ru/sitemap.xml
+
+# LLM / AI crawlers
+# Curated index: https://ratingseo.ru/llms.txt
+# Full content export: https://ratingseo.ru/llms-full.txt
