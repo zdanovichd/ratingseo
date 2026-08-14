@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Award render</title>
+  <style>
+    @font-face {
+      font-family: "Unbounded";
+      src: url("fonts/Unbounded.ttf") format("truetype");
+      font-weight: 700 800;
+      font-display: block;
+    }
+    @font-face {
+      font-family: "JetBrains Mono";
+      src: url("fonts/JetBrainsMono-Medium.ttf") format("truetype");
+      font-weight: 500;
+      font-display: block;
+    }
+    @font-face {
+      font-family: "JetBrains Mono";
+      src: url("fonts/JetBrainsMono-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-display: block;
+    }
+    @font-face {
+      font-family: "Onest";
+      src: url("fonts/Onest.ttf") format("truetype");
+      font-weight: 400 700;
+      font-display: block;
+    }
+    :root {
+      --paper: #eceef1;
+      --ink: #10141c;
+      --ink-soft: #3c4250;
+      --muted: #6b7385;
+      --line: #c8ced8;
+      --signal: #e23b12;
+      --teal: #0d6e68;
+      --accent: var(--signal);
+      --font-display: "Unbounded", system-ui, sans-serif;
+      --font-body: "Onest", system-ui, sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, monospace;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    @page { size: A4 landscape; margin: 0; }
+    body {
+      width: 297mm;
+      height: 210mm;
+      font-family: var(--font-body);
+      color: var(--ink);
+      background: #fff;
+    }
+    body:not(.ready) { visibility: hidden; }
+    .award {
+      width: 297mm;
+      height: 210mm;
+      background: #f7f8fa;
+      position: relative;
+      padding: 18mm;
+      display: flex;
+      flex-direction: column;
+    }
+    .award.is-participant { --accent: var(--teal); }
+    .award::before,
+    .award::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+    }
+    .award::before {
+      inset: 6mm;
+      border: 1px solid rgba(16, 20, 28, 0.18);
+    }
+    .award::after {
+      inset: 8mm;
+      border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+    }
+    .inner {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 4mm;
+    }
+    .brand {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 18pt;
+      letter-spacing: -0.02em;
+    }
+    .signal { color: var(--signal); }
+    .meta {
+      font-family: var(--font-mono);
+      font-size: 8pt;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .kicker {
+      margin: 14mm 0 0;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 9pt;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .doc-number {
+      margin: 3mm 0 0;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 10pt;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+    }
+    .title {
+      margin: 4mm 0 0;
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: 42pt;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .agency {
+      margin: 10mm 0 0;
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: 22pt;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .place { margin: 8mm auto 0; text-align: center; max-width: 160mm; }
+    .place-num {
+      font-family: var(--font-mono);
+      font-size: 48pt;
+      font-weight: 500;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .award.is-participant .place-num { font-size: 36pt; }
+    .place-label {
+      margin-top: 3mm;
+      font-size: 12pt;
+      color: var(--ink-soft);
+      line-height: 1.45;
+    }
+    .score {
+      margin: 7mm 0 0;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 11pt;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+    .note {
+      margin-top: auto;
+      padding-top: 8mm;
+      text-align: center;
+      font-size: 9pt;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+    .footer {
+      margin-top: 6mm;
+      display: flex;
+      justify-content: space-between;
+      gap: 8mm;
+      align-items: end;
+      font-family: var(--font-mono);
+      font-size: 8pt;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .footer .num { color: var(--accent); margin-top: 2mm; }
+    .seal {
+      width: 18mm;
+      height: 18mm;
+      border-radius: 50%;
+      border: 1.5pt solid var(--accent);
+      display: grid;
+      place-items: center;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 7pt;
+      color: var(--accent);
+      text-align: center;
+      line-height: 1.1;
+    }
+  </style>
+</head>
+<body>
+  <article class="award" id="award">
+    <div class="inner">
+      <div class="brand">
+        <div>Rating<span class="signal">SEO</span></div>
+        <div class="meta">league / 2026</div>
+      </div>
+      <p class="kicker" id="kicker">Official league award</p>
+      <p class="doc-number">№ <span id="number">—</span></p>
+      <h1 class="title"><span class="signal">A</span>ward</h1>
+      <p class="agency" id="agency">—</p>
+      <div class="place">
+        <div class="place-num" id="place">—</div>
+        <p class="place-label" id="placeLabel">—</p>
+      </div>
+      <p class="score" id="score">—</p>
+      <p class="note">
+        Документ подтверждает позицию агентства в открытой таблице RatingSEO на дату цикла.
+        Место в рейтинге не продаётся. Актуальные данные: ratingseo.ru
+      </p>
+      <div class="footer">
+        <div>
+          <div>ratingseo.ru</div>
+          <div id="issued">опубликовано 7 авг 2026</div>
+          <div class="num">№ <span id="numberFoot">—</span></div>
+        </div>
+        <div class="seal">RS<br>Q3</div>
+        <div style="text-align:right">
+          <div>редакция</div>
+          <div>RatingSEO</div>
+        </div>
+      </div>
+    </div>
+  </article>
+  <script>
+    (async function () {
+      var params = new URLSearchParams(location.search);
+      var n = params.get("n");
+      if (!n) throw new Error("missing n");
+      var reg = await fetch("/awards/registry.json").then(function (r) { return r.json(); });
+      var a = (reg.awards || []).find(function (x) { return x.number === n; });
+      if (!a) throw new Error("award not found: " + n);
+
+      var participant = a.type === "participant";
+      var award = document.getElementById("award");
+      if (participant) award.classList.add("is-participant");
+
+      document.title = a.number;
+      document.getElementById("kicker").textContent = participant
+        ? "Participant Award"
+        : "Official league award";
+      document.getElementById("number").textContent = a.number;
+      document.getElementById("numberFoot").textContent = a.number;
+      document.getElementById("agency").textContent = a.agencyName;
+      document.getElementById("place").textContent = participant
+        ? "IN"
+        : "#" + String(a.rank).padStart(2, "0");
+      document.getElementById("placeLabel").textContent = participant
+        ? "агентство включено в открытую таблицу рейтинга SEO-агентств России"
+        : a.rank + "-е место в ТОП-10 рейтинга SEO-агентств России";
+      document.getElementById("score").textContent =
+        "Score " + a.score + " · цикл " + a.cycle + " · Index " + a.indexVersion;
+
+      await document.fonts.ready;
+      // ensure paint
+      await new Promise(function (r) { requestAnimationFrame(function () { requestAnimationFrame(r); }); });
+      document.body.classList.add("ready");
+      document.documentElement.setAttribute("data-ready", "1");
+    })().catch(function (err) {
+      document.body.textContent = String(err);
+      document.body.classList.add("ready");
+    });
+  </script>
+</body>
+</html>

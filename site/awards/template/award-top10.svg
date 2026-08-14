@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="297mm" height="210mm" viewBox="0 0 1683 1191" role="img" aria-label="RatingSEO Award template">
+  <defs>
+    <style type="text/css"><![CDATA[
+      @font-face {
+        font-family: Unbounded;
+        src: url("fonts/Unbounded.ttf") format("truetype");
+        font-weight: 700 800;
+      }
+      @font-face {
+        font-family: "JetBrains Mono";
+        src: url("fonts/JetBrainsMono-Medium.ttf") format("truetype");
+        font-weight: 500;
+      }
+      @font-face {
+        font-family: Onest;
+        src: url("fonts/Onest.ttf") format("truetype");
+        font-weight: 400 600;
+      }
+      .bg { fill: #f7f8fa; }
+      .frame { fill: none; stroke: #c8ced8; stroke-width: 2; }
+      .frame-ink { fill: none; stroke: #10141c; stroke-opacity: 0.18; stroke-width: 1.5; }
+      .frame-signal { fill: none; stroke: #e23b12; stroke-opacity: 0.45; stroke-width: 1.5; }
+      .brand { font-family: Unbounded, system-ui, sans-serif; font-weight: 800; font-size: 36px; fill: #10141c; }
+      .signal { fill: #e23b12; }
+      .meta { font-family: "JetBrains Mono", monospace; font-size: 16px; letter-spacing: 0.16em; text-transform: uppercase; fill: #6b7385; }
+      .kicker { font-family: "JetBrains Mono", monospace; font-size: 18px; letter-spacing: 0.22em; text-transform: uppercase; fill: #6b7385; }
+      .number { font-family: "JetBrains Mono", monospace; font-size: 20px; letter-spacing: 0.14em; fill: #e23b12; }
+      .title { font-family: Unbounded, system-ui, sans-serif; font-weight: 800; font-size: 92px; fill: #10141c; }
+      .agency { font-family: Unbounded, system-ui, sans-serif; font-weight: 700; font-size: 44px; fill: #10141c; }
+      .place { font-family: "JetBrains Mono", monospace; font-weight: 500; font-size: 96px; fill: #e23b12; }
+      .label { font-family: Onest, system-ui, sans-serif; font-size: 28px; fill: #3c4250; }
+      .score { font-family: "JetBrains Mono", monospace; font-size: 24px; letter-spacing: 0.08em; fill: #6b7385; }
+      .note { font-family: Onest, system-ui, sans-serif; font-size: 20px; fill: #6b7385; }
+      .foot { font-family: "JetBrains Mono", monospace; font-size: 16px; letter-spacing: 0.12em; text-transform: uppercase; fill: #6b7385; }
+      .seal-ring { fill: none; stroke: #e23b12; stroke-width: 3; }
+      .seal-text { font-family: Unbounded, system-ui, sans-serif; font-weight: 800; font-size: 18px; fill: #e23b12; }
+    ]]></style>
+  </defs>
+
+  <rect class="bg" width="1683" height="1191"/>
+  <rect class="frame" x="28" y="28" width="1627" height="1135"/>
+  <rect class="frame-ink" x="44" y="44" width="1595" height="1103"/>
+  <rect class="frame-signal" x="56" y="56" width="1571" height="1079"/>
+
+  <text class="brand" x="80" y="110">Rating<tspan class="signal">SEO</tspan></text>
+  <text class="meta" x="1603" y="110" text-anchor="end">league / 2026</text>
+
+  <text class="kicker" x="841.5" y="230" text-anchor="middle">OFFICIAL LEAGUE AWARD</text>
+  <text class="number" x="841.5" y="268" text-anchor="middle">No. RS-26Q3-T-0001</text>
+
+  <text class="title" x="841.5" y="370" text-anchor="middle"><tspan class="signal">A</tspan>ward</text>
+  <text class="agency" x="841.5" y="460" text-anchor="middle">Seo Performance Agency</text>
+
+  <text class="place" x="841.5" y="590" text-anchor="middle">#01</text>
+  <text class="label" x="841.5" y="640" text-anchor="middle">1-е место в ТОП-10 рейтинга SEO-агентств России</text>
+
+  <text class="score" x="841.5" y="720" text-anchor="middle">Score 9.9 · цикл Q3 2026 · Index v1.2</text>
+
+  <text class="note" x="841.5" y="820" text-anchor="middle">Документ подтверждает позицию агентства в открытой таблице RatingSEO на дату цикла.</text>
+  <text class="note" x="841.5" y="850" text-anchor="middle">Место в рейтинге не продаётся. Актуальные данные: ratingseo.ru</text>
+
+  <text class="foot" x="80" y="1040">ratingseo.ru</text>
+  <text class="foot" x="80" y="1070">опубликовано 7 авг 2026</text>
+  <text class="number" x="80" y="1105" style="font-size:16px">No. RS-26Q3-T-0001</text>
+
+  <circle class="seal-ring" cx="841.5" cy="1060" r="42"/>
+  <text class="seal-text" x="841.5" y="1056" text-anchor="middle">RS</text>
+  <text class="foot" x="841.5" y="1078" text-anchor="middle" style="fill:#e23b12;letter-spacing:0.04em">Q3</text>
+
+  <text class="foot" x="1603" y="1040" text-anchor="end">редакция</text>
+  <text class="foot" x="1603" y="1070" text-anchor="end">RatingSEO</text>
+</svg>

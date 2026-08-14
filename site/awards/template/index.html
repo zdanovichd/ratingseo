@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Award PDF template — RatingSEO</title>
+  <style>
+    @font-face {
+      font-family: "Unbounded";
+      src: url("fonts/Unbounded.ttf") format("truetype");
+      font-weight: 700 800;
+      font-display: block;
+    }
+    @font-face {
+      font-family: "JetBrains Mono";
+      src: url("fonts/JetBrainsMono-Medium.ttf") format("truetype");
+      font-weight: 500;
+      font-display: block;
+    }
+    @font-face {
+      font-family: "JetBrains Mono";
+      src: url("fonts/JetBrainsMono-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-display: block;
+    }
+    @font-face {
+      font-family: "Onest";
+      src: url("fonts/Onest.ttf") format("truetype");
+      font-weight: 400 700;
+      font-display: block;
+    }
+    :root {
+      --paper: #eceef1;
+      --paper-2: #f7f8fa;
+      --ink: #10141c;
+      --ink-soft: #3c4250;
+      --muted: #6b7385;
+      --line: #c8ced8;
+      --signal: #e23b12;
+      --font-display: "Unbounded", system-ui, sans-serif;
+      --font-body: "Onest", system-ui, sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, monospace;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-body);
+      background: #d9dde3;
+      color: var(--ink);
+    }
+    .toolbar {
+      max-width: 1122px;
+      margin: 0 auto;
+      padding: 1rem 1.25rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .toolbar p {
+      margin: 0;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .toolbar a {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: #fff;
+      padding: 0.55rem 0.9rem;
+      font-size: 0.9rem;
+    }
+    .toolbar a.ghost {
+      background: transparent;
+      color: var(--ink);
+    }
+    .stage {
+      padding: 0 1rem 2.5rem;
+      display: flex;
+      justify-content: center;
+    }
+    .award {
+      width: min(100%, 1122px);
+      aspect-ratio: 297 / 210;
+      background: #f7f8fa;
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 50px rgba(16, 20, 28, 0.12);
+      position: relative;
+      padding: clamp(1.25rem, 3vw, 2.5rem);
+      display: flex;
+      flex-direction: column;
+    }
+    .award::before,
+    .award::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+    }
+    .award::before {
+      inset: 0.65rem;
+      border: 1px solid rgba(16, 20, 28, 0.18);
+    }
+    .award::after {
+      inset: 0.95rem;
+      border: 1px solid rgba(226, 59, 18, 0.35);
+    }
+    .award-inner {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: clamp(0.75rem, 2vw, 1.5rem);
+    }
+    .brand {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      font-family: var(--font-display);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+    }
+    .brand .signal { color: var(--signal); }
+    .meta {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .kicker {
+      margin: 2.2rem 0 0;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .doc-number {
+      margin: 0.65rem 0 0;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      color: var(--signal);
+    }
+    .title {
+      margin: 0.75rem 0 0;
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .title .signal { color: var(--signal); }
+    .agency {
+      margin: 1.75rem 0 0;
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: clamp(1.35rem, 3vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .place { margin: 1.25rem auto 0; text-align: center; max-width: 28rem; }
+    .place-num {
+      font-family: var(--font-mono);
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 500;
+      color: var(--signal);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .place-label {
+      margin-top: 0.5rem;
+      font-size: 1.05rem;
+      color: var(--ink-soft);
+      line-height: 1.45;
+    }
+    .score {
+      margin: 1.25rem 0 0;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+    .note {
+      margin-top: auto;
+      padding-top: 1.5rem;
+      text-align: center;
+      font-size: 0.82rem;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+    .footer {
+      margin-top: 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: end;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .footer .num { color: var(--signal); margin-top: 0.35rem; letter-spacing: 0.08em; }
+    .seal {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 2px solid var(--signal);
+      display: grid;
+      place-items: center;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+      color: var(--signal);
+      text-align: center;
+      line-height: 1.1;
+    }
+    .hint {
+      max-width: 1122px;
+      margin: 0 auto 2rem;
+      padding: 0 1.25rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    @media print {
+      @page { size: A4 landscape; margin: 0; }
+      body { background: #fff; }
+      .toolbar, .hint { display: none !important; }
+      .stage { padding: 0; }
+      .award {
+        width: 297mm;
+        height: 210mm;
+        aspect-ratio: auto;
+        max-width: none;
+        box-shadow: none;
+        border: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <p>Template · vector PDF · site fonts</p>
+    <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+      <a href="award-top10.pdf" download="RS-26Q3-T-0001.pdf">Скачать PDF</a>
+      <a class="ghost" href="award-top10.svg">SVG</a>
+    </div>
+  </div>
+
+  <div class="stage">
+    <article class="award" id="award">
+      <div class="award-inner">
+        <div class="brand">
+          <div>Rating<span class="signal">SEO</span></div>
+          <div class="meta">league / 2026</div>
+        </div>
+        <p class="kicker">Official league award</p>
+        <p class="doc-number">№ RS-26Q3-T-0001</p>
+        <h1 class="title"><span class="signal">A</span>ward</h1>
+        <p class="agency">Seo Performance Agency</p>
+        <div class="place">
+          <div class="place-num">#01</div>
+          <p class="place-label">1-е место в ТОП-10 рейтинга SEO-агентств России</p>
+        </div>
+        <p class="score">Score 9.9 · цикл Q3 2026 · Index v1.2</p>
+        <p class="note">
+          Документ подтверждает позицию агентства в открытой таблице RatingSEO на дату цикла.
+          Место в рейтинге не продаётся. Актуальные данные: ratingseo.ru
+        </p>
+        <div class="footer">
+          <div>
+            <div>ratingseo.ru</div>
+            <div>опубликовано 7 авг 2026</div>
+            <div class="num">№ RS-26Q3-T-0001</div>
+          </div>
+          <div class="seal">RS<br>Q3</div>
+          <div style="text-align:right">
+            <div>редакция</div>
+            <div>RatingSEO</div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <p class="hint">
+    Кнопка скачивает готовый векторный PDF (шрифты встроены). Это один шаблон-пример; массовую выдачу пока не делал.
+  </p>
+</body>
+</html>
