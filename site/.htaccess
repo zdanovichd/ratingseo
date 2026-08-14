@@ -34,3 +34,19 @@ RewriteRule ^privacy$ privacy/index.html [L]
 # Методология
 RewriteRule ^methodology\.html$ https://ratingseo.ru/methodology [R=301,L]
 RewriteRule ^methodology$ methodology/index.html [L]
+
+# О проекте
+RewriteRule ^about\.html$ https://ratingseo.ru/about [R=301,L]
+RewriteRule ^about$ about/index.html [L]
+
+# Карточки агентств
+RewriteRule ^agency/?$ agency/index.html [L]
+RewriteRule ^agency/([a-z0-9-]+)/?$ agency/$1/index.html [L]
+
+# Нишевые рейтинги
+RewriteRule ^rating/?$ rating/index.html [L]
+RewriteRule ^rating/([a-z0-9-]+)/?$ rating/$1/index.html [L]
+
+# Awards
+RewriteRule ^certificates/?$ certificates/index.html [L]
+RewriteRule ^certificate/([a-z0-9-]+)/?$ certificate/$1/index.html [L]

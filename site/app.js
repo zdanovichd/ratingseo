@@ -94,7 +94,7 @@
       .join("");
   }
 
-  function renderAgency(agency, index) {
+  function renderAgency(agency, index, displayRank) {
     const delay = Math.min(index, 8) * 40;
     const tags = agency.niches
       .map(function (n) {
@@ -102,7 +102,7 @@
       })
       .join("");
     const href = withUtm(agency.website, agency.id);
-    const rank = String(agency.rank).padStart(2, "0");
+    const rank = String(displayRank).padStart(2, "0");
 
     return (
       '<article class="rank-row animate-rise" role="listitem" style="animation-delay:' +
@@ -121,7 +121,13 @@
       '<div class="agency-main">' +
       '<div class="agency-title-row">' +
       '<h3 class="agency-name">' +
-      escapeHtml(agency.name) +
+      (agency.rank <= 10
+        ? '<a class="agency-name-link" href="/agency/' +
+          encodeURIComponent(agency.id) +
+          '/">' +
+          escapeHtml(agency.name) +
+          "</a>"
+        : escapeHtml(agency.name)) +
       "</h3>" +
       '<span class="agency-city">' +
       escapeHtml(agency.city) +
@@ -157,21 +163,60 @@
     );
   }
 
+  function nicheSlug(name) {
+    return (data.nicheSlugs && data.nicheSlugs[name]) || "";
+  }
+
   function renderRanking() {
     const list = document.getElementById("agency-list");
     const count = document.getElementById("rating-count");
     const lead = document.getElementById("rating-lead");
+    const cycle = document.getElementById("rating-cycle");
+    const nicheLink = document.getElementById("niche-page-link");
+    const nicheAnchor = document.getElementById("niche-page-anchor");
     const moreWrap = document.getElementById("load-more-wrap");
     const moreBtn = document.getElementById("load-more");
     if (!list) return;
 
     const filtered = filteredAgencies();
     const shown = filtered.slice(0, visible);
+    const slug = nicheSlug(niche);
+
+    if (cycle) {
+      if (niche === "Все ниши") {
+        cycle.textContent =
+          "Q3 2026 · Index v1.2 · следующий пересчёт Q4";
+      } else {
+        cycle.textContent =
+          "Ниша «" +
+          niche +
+          "» · Q3 2026 · Index v1.2 · следующий пересчёт Q4";
+      }
+    }
+
+    if (nicheLink && nicheAnchor) {
+      if (niche !== "Все ниши" && slug) {
+        nicheLink.hidden = false;
+        nicheAnchor.href = "/rating/" + slug + "/";
+        nicheAnchor.textContent =
+          "Открыть страницу ниши «" + niche + "» →";
+      } else {
+        nicheLink.hidden = true;
+      }
+    }
 
     if (lead) {
-      lead.textContent =
-        data.agencies.length +
-        " карточек в открытой выборке. Фильтруйте по нише — скор считается по одной методике для всех.";
+      if (niche === "Все ниши") {
+        lead.innerHTML =
+          data.agencies.length +
+          " карточек в открытой выборке · цикл Q3 2026. Топ пересчитаем в Q4 — позиции могут измениться. " +
+          '<a href="/rating/">Все нишевые рейтинги</a>';
+      } else {
+        lead.textContent =
+          "Только агентства с нишей «" +
+          niche +
+          "» в досье. Score общий (Index v1.2), порядок — среди попавших в фильтр.";
+      }
     }
 
     if (count) {
@@ -182,9 +227,11 @@
       list.innerHTML =
         '<p class="empty-state">В этой нише пока нет агентств в открытой выборке.</p>';
     } else {
+      const useLocalRank = niche !== "Все ниши";
       list.innerHTML = shown
         .map(function (agency, i) {
-          return renderAgency(agency, i);
+          const displayRank = useLocalRank ? i + 1 : agency.rank;
+          return renderAgency(agency, i, displayRank);
         })
         .join("");
     }
