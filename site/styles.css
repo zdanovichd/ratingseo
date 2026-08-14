@@ -120,21 +120,132 @@ textarea {
   color: var(--muted);
 }
 
+.nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-left: auto;
+  border: 1px solid color-mix(in oklab, var(--ink) 18%, transparent);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.nav-toggle-bars,
+.nav-toggle-bars::before,
+.nav-toggle-bars::after {
+  display: block;
+  width: 1.05rem;
+  height: 2px;
+  background: currentColor;
+  position: relative;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.nav-toggle-bars::before,
+.nav-toggle-bars::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.nav-toggle-bars::before { top: -6px; }
+.nav-toggle-bars::after { top: 6px; }
+
+body.nav-open {
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  body.nav-open {
+    overflow: auto;
+  }
+}
+
+body.nav-open .nav-toggle-bars {
+  background: transparent;
+}
+body.nav-open .nav-toggle-bars::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+body.nav-open .nav-toggle-bars::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
 .nav {
   display: none;
   align-items: center;
-  gap: 2rem;
+  gap: 1.25rem;
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--ink-soft);
+  min-width: 0;
+  flex: 1 1 auto;
+  justify-content: center;
 }
 
-.nav a:hover {
+.nav a:hover,
+.nav a[aria-current="page"] {
   color: var(--signal);
 }
 
+.nav-mobile-actions {
+  display: none;
+}
+
+.nav-more {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.nav-more > summary {
+  list-style: none;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  padding: 0.25rem 0;
+}
+.nav-more > summary::-webkit-details-marker { display: none; }
+.nav-more > summary::after {
+  content: " ▾";
+  font-size: 0.75em;
+  opacity: 0.7;
+}
+
+.nav-more-panel {
+  position: absolute;
+  top: calc(100% + 0.55rem);
+  right: 0;
+  min-width: 11rem;
+  padding: 0.45rem;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: 0 12px 30px color-mix(in oklab, var(--ink) 12%, transparent);
+  display: grid;
+  gap: 0.15rem;
+  z-index: 60;
+}
+
+.nav-more-panel a {
+  display: block;
+  padding: 0.55rem 0.7rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.nav-more-panel a:hover,
+.nav-more-panel a[aria-current="page"] {
+  color: var(--signal);
+  background: color-mix(in oklab, var(--signal) 8%, transparent);
+}
+
 .header-actions {
-  display: flex;
+  display: none;
   align-items: center;
   gap: 0.35rem;
   flex-shrink: 0;
@@ -1645,8 +1756,79 @@ body.modal-open {
   }
 }
 
-@media (min-width: 768px) {
+@media (max-width: 767px) {
+  .header-inner > .nav {
+    flex: 0 0 0;
+    width: 0;
+    min-width: 0;
+    margin: 0;
+    border: 0;
+  }
+
   .nav {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0;
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    width: auto !important;
+    max-height: calc(100vh - 64px);
+    overflow: auto;
+    padding: 0.5rem 1rem 1.25rem;
+    background: color-mix(in oklab, var(--paper) 96%, transparent);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(12px);
+    transform: translateY(-0.5rem);
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+    z-index: 45;
+  }
+
+  body.nav-open .nav {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    visibility: visible;
+  }
+
+  .nav > a {
+    padding: 0.9rem 0.15rem;
+    border-bottom: 1px solid color-mix(in oklab, var(--line) 70%, transparent);
+    font-size: 1rem;
+  }
+
+  .nav-more { display: none !important; }
+
+  .nav-mobile-actions {
+    display: grid;
+    gap: 0.55rem;
+    margin-top: 1rem;
+  }
+
+  .nav-mobile-actions .btn {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .nav-toggle {
+    display: none;
+  }
+
+  .nav {
+    display: flex;
+    overflow: hidden;
+  }
+
+  .header-actions {
     display: flex;
   }
 

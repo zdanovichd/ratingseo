@@ -35,18 +35,35 @@
     <div class="container header-inner">
       <a class="logo" href="/" aria-label="RatingSEO — на главную">
         <span class="logo-name">Rating<span class="signal">SEO</span></span>
-        <span class="logo-meta">agency / hub</span>
       </a>
-      <nav class="nav" aria-label="Основная навигация">
-        <a href="/#rating">Рейтинг</a>
-        <a href="/rating/">Ниши</a>
-        <a href="/agency/" aria-current="page">Агентства</a>
-        <a href="/certificates/">Awards</a>
-        <a href="/methodology/">Методика</a>
-        <a href="/about/">О проекте</a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Открыть меню">
+        <span class="nav-toggle-bars" aria-hidden="true"></span>
+      </button>
+      <nav class="nav" id="site-nav" aria-label="Основная навигация">
+        <a href="/#rating" data-nav="rating">Рейтинг</a>
+        <a href="/rating/" data-nav="niches">Ниши</a>
+        <a href="/agency/" data-nav="agency" aria-current="page">Агентства</a>
+        <a href="/certificates/" data-nav="awards">Awards</a>
+        <a href="/methodology/" data-nav="methodology">Методика</a>
+        <a href="/about/" data-nav="about">О проекте</a>
+        <div class="nav-mobile-actions">
+          <a class="btn btn-header-ghost" href="/methodology/#join">Попасть в рейтинг</a>
+          <a class="btn btn-ink" href="/#lead">Подобрать агентство</a>
+        </div>
       </nav>
       <div class="header-actions">
-        <a class="btn btn-ink" href="/#lead"><span class="label-full">Подобрать агентство</span><span class="label-short">Подбор</span></a>
+        <details class="nav-more" hidden>
+          <summary>Ещё</summary>
+          <div class="nav-more-panel"></div>
+        </details>
+        <a class="btn btn-header-ghost" href="/methodology/#join" data-open-join>
+          <span class="label-full">Попасть в рейтинг</span>
+          <span class="label-short">В рейтинг</span>
+        </a>
+        <a class="btn btn-ink" href="/#lead">
+          <span class="label-full">Подобрать агентство</span>
+          <span class="label-short">Подбор</span>
+        </a>
       </div>
     </div>
   </header>
@@ -253,5 +270,6 @@
       </div>
     </div>
   </footer>
+  <script src="/nav.js" defer></script>
 </body>
 </html>
