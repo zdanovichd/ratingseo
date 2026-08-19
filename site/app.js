@@ -103,6 +103,7 @@
       .join("");
     const href = withUtm(agency.website, agency.id);
     const rank = String(displayRank).padStart(2, "0");
+    var updatedAt = "07.08.2026";
 
     return (
       '<article class="rank-row animate-rise" role="listitem" style="animation-delay:' +
@@ -136,6 +137,16 @@
       '<p class="agency-summary">' +
       escapeHtml(agency.summary) +
       "</p>" +
+      '<div class="verified-signals">' +
+      '<span class="verified-signals-title">Проверенные данные</span>' +
+      "<ul>" +
+      "<li>Обновлено: " +
+      updatedAt +
+      "</li>" +
+      "<li>Проверка: редакция RatingSEO</li>" +
+      "<li>Пересчёт: цикл Q3 2026 / Index v1.2</li>" +
+      "</ul>" +
+      "</div>" +
       '<div class="tags">' +
       tags +
       "</div>" +

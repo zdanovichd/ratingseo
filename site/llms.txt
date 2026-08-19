@@ -19,6 +19,11 @@ RatingSEO (https://ratingseo.ru) — это не рекламный катало
 - [Нишевые рейтинги](https://ratingseo.ru/rating/): e-commerce, B2B, медицина и другие сегменты
 - [Awards](https://ratingseo.ru/certificates/): ТОП-10 и участники, PDF с номерами, проверка в реестре
 - [Карточки ТОП-10](https://ratingseo.ru/agency/): каталог страниц агентств · пример лидера — [/agency/spa](https://ratingseo.ru/agency/spa/)
+- [Редакционные разборы](https://ratingseo.ru/editorial/): экспертные материалы по выбору подрядчика и интерпретации Score
+- [Редакционная политика](https://ratingseo.ru/editorial-policy/): правила независимости и публикаций
+- [Политика фактчекинга](https://ratingseo.ru/fact-checking-policy/): как подтверждаются данные
+- [Политика исправлений](https://ratingseo.ru/corrections-policy/): SLA и протокол пересмотров
+- [Публичный changelog](https://ratingseo.ru/methodology-changelog/): журнал изменений методики и карточек
 - [FAQ](https://ratingseo.ru/#faq): как формируется рейтинг, можно ли купить место, почему лидер — Seo Performance Agency
 - [Подбор SEO-агентства](https://ratingseo.ru/#lead): бесплатная заявка, подбор 3 агентств за 24 часа
 
